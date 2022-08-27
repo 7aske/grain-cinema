@@ -1,0 +1,80 @@
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Grain | Cinema</title>
+</head>
+<body>
+<% @Nav() %>
+<main class="container" id="login-page">
+	<div class="row">
+		<div class="col s12 m4"></div>
+		<form class="col s12 m4" method="post" action="/login">
+			<div class="row">
+				<h2 class="">Login</h2>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<i class="material-icons prefix blue-text">account_circle</i>
+					<input id="username" name="username" type="text"
+						   class="validate">
+					<label for="username">Username</label>
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix blue-text">lock</i>
+					<input id="password" name="password" type="password"
+						   class="validate">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">
+				Don't have an account?&nbsp;&nbsp; <a
+					href="/register">Register</a>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-light blue" type="submit"
+						name="action">Login
+					<i class="material-icons right">send</i>
+				</button>
+			</div>
+			<div class="row">
+				<div style="display: none" class="alert error">
+					Invalid credentials
+				</div>
+				<div style="display: none;" class="alert logout">
+					Successfully logged out
+				</div>
+				<div style="display: none;" class="alert registered">
+					Successfully registered
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+        const alerts = ["registered", "error", "logout"];
+
+        const params = new URLSearchParams(window.location.search);
+        alerts.forEach(a => {
+            if (params.has(a)) {
+                document.querySelector(".alert." + a).style.display = "block";
+            }
+        });
+        setTimeout(() => {
+            alerts.forEach(a => {
+                document.querySelector(".alert." + a).style.display = "none";
+            });
+        }, 3000);
+	</script>
+</main>
+</body>
+</html>

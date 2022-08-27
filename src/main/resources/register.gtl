@@ -1,0 +1,65 @@
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports(); %>
+	<title>Registration</title>
+</head>
+<body>
+<% @Nav(); %>
+<main id="register-page">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m4"></div>
+			<form class="col s12 m4" method="post" action="/register">
+				<div class="row">
+					<h2 class="">Registration</h2>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="email" name="username" type="email" class="validate">
+						<label for="email">Email</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="password" name="password" type="password" class="validate">
+						<label for="password">Password</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="confirm" name="confirm" type="password" class="validate">
+						<label for="confirm">Confirm Password</label>
+					</div>
+				</div>
+				<!--<div class="row">
+					<div class="col s12">
+						This is an inline input field:
+						<div class="input-field inline">
+							<input id="email_inline" type="email" class="validate">
+							<label for="email_inline">Email</label>
+							<span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+						</div>
+					</div>
+				</div>-->
+				<div class="row">
+					<button class="btn waves-effect waves-light blue" type="submit" name="action">Register
+						<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<% include
+	"fragments/index/movie-card.gtl"
+	as MovieCard; %>
+<% include
+	"fragments/screening/seat.gtl"
+	as Seat; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Grain | Cinema</title>
+</head>
+<body>
+<% @Nav() %>
+<main id="screening-page">
+	<div class="row">
+		<div class="col s12 l2"></div>
+		<div class="col s12 l4">
+			<h2>Seats</h2>
+			<div class="seats">
+				<% foreach(seat in range(screening.getRoom().getSeats()) {
+					@Seat(id=screening.id, number = seat + 1, taken = screening.isSeatTaken(seat + 1), self = screening.isSeatTakenBy(seat + 1, #authentication));
+				} %>
+			</div>
+		</div>
+		<div class="col s12 l4">
+			<div class="row">
+				<% @MovieCard(movie = screening.getMovie(), cols = 's12') %>
+			</div>
+		</div>
+	</div>
+</main>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".seat form").forEach(seat => {
+            if (!seat.parentElement.classList.contains("taken") || seat.parentElement.classList.contains("self"))
+				seat.addEventListener("click", seat.submit);
+		});
+	});
+</script>
+</body>
+</html>

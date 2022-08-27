@@ -1,0 +1,22 @@
+<% include "fragments/import.gtl" as Imports; %>
+<% include "fragments/nav.gtl" as Nav; %>
+<% include "fragments/index/movie-card.gtl" as MovieCard; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Grain | Cinema</title>
+</head>
+<body>
+	<% @Nav() %>
+<main id="index-page" class="container">
+	<div class="row">
+		<% foreach (movie in movies) @MovieCard(movie=movie); %>
+	</div>
+</main>
+</body>
+</html>

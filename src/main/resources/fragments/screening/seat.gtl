@@ -1,0 +1,6 @@
+<div class="seat ${taken ? 'taken' : ''} ${self ? 'self' : ''}">
+	<form method="post" action="/screenings/${id}/reservations/${number}">
+		<img src="/scaled.png" alt="Seat ${number}">
+		<span class="number">${number}</span>
+	</form>
+</div>

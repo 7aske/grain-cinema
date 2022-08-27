@@ -1,0 +1,25 @@
+<% import "java.time.format.DateTimeFormatter" as DTFormat; %>
+<% include "fragments/util/spinner.gtl" as Spinner; %>
+<% FORMAT='E, dd.MM. HH:mm:ss'; %>
+<div class="col ${cols ?? 's12 m6 l4'}">
+	<div class="card movie-card">
+		<div class="card-image">
+			<img src="${movie.url}">
+			<span class="card-title">${movie.title}</span>
+			<!--a class="btn-floating halfway-fab waves-effect waves-light red"><i
+					class="material-icons">add</i></a>-->
+		</div>
+		<div class="card-content">
+			<p><b>Genre:</b> ${movie.genre}</p>
+			<p><b>Duration:</b> ${movie.duration}min</p>
+			<p><b>Director:</b> ${movie.director}</p>
+			<div class="screenings row">
+				<% foreach(screening in movie.screenings) {%>
+					<div class="col s12 m12 l6">
+						<a class="time-link" href="/screenings/${screening.id}"><span class="time">${screening.time.format(DTFormat.ofPattern(FORMAT))}</span></a>
+					</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</div>
