@@ -30,7 +30,7 @@ public class ReservationRepository extends BaseRepository<Reservation> {
 		return entityManager.createQuery(query).getResultList();
 	}
 
-	public Reservation findByIdScreeningFkAndSeat(Integer id, Integer number) {
+	public Reservation findByUsernameAndIdScreeningFkAndSeat(String username, Long id, Integer number) {
 		EntityManager entityManager = getEntityManager();
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Reservation> cq = cb.createQuery(Reservation.class);
@@ -38,8 +38,10 @@ public class ReservationRepository extends BaseRepository<Reservation> {
 
 		CriteriaQuery<Reservation> query = cq.select(root)
 				.where(cb.and(
+						cb.equal(root.get("user").get("username"), username),
 						cb.equal(root.get("screening").get("id"), id),
 						cb.equal(root.get("seat"), number)));
+
 		return entityManager.createQuery(query).getSingleResult();
 	}
 }

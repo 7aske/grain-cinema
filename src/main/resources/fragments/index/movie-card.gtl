@@ -4,15 +4,15 @@
 <div class="col ${cols ?? 's12 m6 l4'}">
 	<div class="card movie-card">
 		<div class="card-image">
-			<img src="${movie.url}">
+			<img class="card-url" src="${movie.url}">
 			<span class="card-title">${movie.title}</span>
 			<!--a class="btn-floating halfway-fab waves-effect waves-light red"><i
 					class="material-icons">add</i></a>-->
 		</div>
 		<div class="card-content">
-			<p><b>Genre:</b> ${movie.genre}</p>
-			<p><b>Duration:</b> ${movie.duration}min</p>
-			<p><b>Director:</b> ${movie.director}</p>
+			<p><b>Genre:</b> <span class="card-genre">${movie.genre}</span></p>
+			<p><b>Duration:</b> <span class="card-duration">${movie.duration}</span>min</p>
+			<p><b>Director:</b> <span class="card-director">${movie.director}</span></p>
 			<div class="screenings row">
 				<% foreach(screening in movie.screenings) {%>
 					<div class="col s12 m12 l6">

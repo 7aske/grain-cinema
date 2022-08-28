@@ -1,0 +1,101 @@
+<% import "java.time.format.DateTimeFormatter" as DTFormat; %>
+<% include "fragments/util/spinner.gtl" as Spinner; %>
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<% include
+	"fragments/util/pagination.gtl"
+	as Pagination; %>
+<% include
+	"fragments/index/movie-card.gtl"
+	as MovieCard; %>
+<% FORMAT='E, dd.MM. HH:mm:ss'; %>
+<% TIME_FORMAT='HH:mm:ss'; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Cinema | Rooms</title>
+</head>
+<body>
+<% @Nav() %>
+<main id="admin-page">
+	<div class="row">
+		<div class="col s12 l2"></div>
+		<div class="col s12 l4">
+			<div class="row mt-3">
+				<a href="/admin/movies/${movie.id}/screenings/add" class="btn">add</a>
+			</div>
+			<div class="row">
+				<ul class="collection">
+					<% foreach(screening in screenings) { %>
+					<li class="collection-item white-text">
+						<a href="/admin/movies/${screening.movie.id}/screenings?screening=${screening.id}"
+						   class="white-text">
+							${screening.time.format(DTFormat.ofPattern(FORMAT))}
+							-
+							${screening.time.plusMinutes(screening.movie.duration).format(DTFormat.ofPattern(TIME_FORMAT))}
+							<span class="secondary-content">Room ${screening.room.id}</span>
+						</a>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+		<div class="col s12 l4">
+			<% if (screening) { %>
+			<div class="row pl-4 pr-4 mt-3">
+				<form action="/admin/movies/${screening.movie.id}/screenings/save" method="post">
+					<input type="hidden" name="id" value="${screening.id ?? ''}">
+					<input type="hidden" name="movieId" value="${screening.movie.id ?? ''}">
+					<div class="row">
+						<div class="input-field col s12">
+							<input id="time" name="time" type="datetime-local"
+								   value="${screening.time}">
+							<label for="time" class="active">Time</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<label for="room" class="active">Room</label>
+							<select id="room" name="roomId" class="browser-default" value="${screening.room ? screening.room.id : ''}">
+								<option value="" disabled selected>Choose your option</option>
+								<% foreach(room in rooms) { %>
+									<option ${(screening.room != null) && (room.id == screening.room.id) ? 'selected' : '' } value="${room.id}">Room ${room.id}</option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+					<div>
+						<button class="btn" type="submit">Save</button>
+					</div>
+				</form>
+			</div>
+			<% if (screening.id && screening.movie.id) { %>
+			<div class="row pl-4 pr-4">
+				<form action="/admin/movies/${screening.movie.id}/screenings/delete" method="post">
+					<input type="hidden" name="id" value="${screening.id ?? ''}">
+					<div>
+						<button class="btn red accent-2">delete</button>
+					</div>
+				</form>
+			</div>
+			<% } %>
+			<% } %>
+		</div>
+	</div>
+</main>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+        M.updateTextFields();
+    });
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class ApiController {
 	private final ScreeningService screeningService;
 
 	@GetMapping("/screenings/{screeningId}/seats")
-	public String getRemainingSeats(@PathVariable("screeningId") Integer id){
+	public String getRemainingSeats(@PathVariable("screeningId") Long id){
 		return String.valueOf(screeningService.getRemainingSeats(id));
 	}
 }

@@ -1,0 +1,120 @@
+<% import 'com._7aske.cinema.model.Movie'; %>
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<% include
+	"fragments/util/pagination.gtl"
+	as Pagination; %>
+<% include
+	"fragments/index/movie-card.gtl"
+	as MovieCard; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Grain | Cinema | Admin</title>
+</head>
+<body>
+<% @Nav() %>
+<main id="admin-page">
+	<div class="row">
+		<div class="col s12 l2"></div>
+		<div class="col s12 l4">
+			<div class="row pt-4">
+				<form class="col s12" action="/admin/movies/save" method="post">
+					<input type="hidden" name="id" value="${movie.id}">
+					<div class="row mb-1">
+						<div class="input-field col s12">
+							<input placeholder="Title" id="title" name="title"
+								   type="text" value="${movie.title ?? ''}">
+							<label for="title">Title</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="input-field col s12">
+							<input placeholder="Genre" id="genre" name="genre"
+								   type="text" value="${movie.genre ?? ''}">
+							<label for="genre">Genre</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="input-field col s12">
+							<input placeholder="Director" id="director"
+								   name="director" type="text" value="${movie.director ?? ''}">
+							<label for="director">Director</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="input-field col s12 l6">
+							<input placeholder="Duration(min)" id="duration"
+								   name="duration" type="number" value="${movie.duration ?? ''}">
+							<label for="duration">Duration</label>
+						</div>
+						<div class="input-field col s12 l6">
+							<input placeholder="Release date" id="releaseDate"
+								   name="releaseDate" type="date" value="${movie.releaseDate}">
+							<label for="releaseDate">Release Date</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="input-field col s12">
+							<input placeholder="Image URL" id="url"
+								   name="url" type="text" value="${movie.url}">
+							<label for="url">Image URL</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="input-field col s12">
+							<textarea id="description" name="description" class="materialize-textarea">${movie.description ?? ''}</textarea>
+							<label for="description">Description</label>
+						</div>
+					</div>
+					<div class="row mb-1">
+						<div class="col s12">
+							<div class="inline-block">
+								<button type="submit" class="btn green accent-4">save</button>
+							</div>
+							<div class="inline-block">
+								<a href="/admin/movies/${movie.id}/screenings" class="btn">SCRNGS</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col s12 l4 pt-2">
+			<% @MovieCard(movie=movie, cols='s12') %>
+		</div>
+	</div>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let fields = ["url", "title", "genre", "duration", "director"];
+        let cardFields = Object.assign({}, ...fields.map(field => ({[field]: document.querySelector(".card-" + field)})));
+
+        fields.forEach(field => {
+            let inputField = document.getElementById(field);
+            if (cardFields[field].nodeName === "IMG") {
+                cardFields[field].src = inputField.value;
+            } else {
+                cardFields[field].innerText = inputField.value;
+            }
+            inputField.addEventListener("input", ev => {
+                if (cardFields[field].nodeName === "IMG") {
+                    cardFields[field].src = ev.target.value;
+                } else {
+                    cardFields[field].innerText = ev.target.value;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

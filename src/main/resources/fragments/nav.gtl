@@ -1,22 +1,63 @@
+<% import "java.time.format.DateTimeFormatter" as DTFormat; %>
+<% include "fragments/util/spinner.gtl" as Spinner; %>
+<% FORMAT=DTFormat.ofPattern('E, dd.MM. HH:mm:ss'); %>
 <nav class="nav-extended">
 	<div class="nav-wrapper container">
 		<a href="/" class="brand-logo">Cinema</a>
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<% if (#authentication == null) { %>
-			<li><a href="/login">Login</a></li>
+				<li><a href="/login">Login</a></li>
 			<% } else { %>
-			<li><a href="/"><%= #authentication.getName() %></a></li>
-			<li><a href="/logout">Logout</a></li>
+				<% if (#sec.hasAuthority('ADMIN')) { %>
+					<li><a href="/admin/movies">Movies</a></li>
+					<li><a href="/admin/rooms">Rooms</a></li>
+				<% } %>
+				<li class="pl-2 pr-2"><%= #authentication.getName() %></li>
+				<li><a href="/logout">Logout</a></li>
 			<% } %>
 		</ul>
 	</div>
 	<div class="nav-content container">
-		<div class="col s12">
-			<% if (!#request.getPath().equals('/')) { %>
-				<a href="/" class="breadcrumb">Index</a>
-			<% } %>
+		<div class="col s12 pb-2">
 			<% if (screening != null) { %>
-				<a href="#!" class="breadcrumb">${screening.movie.title}</a>
+				<a href="/" class="breadcrumb">Home</a>
+				<% if (screening.movie != null) { %>
+					<% if (#sec.hasAuthority('ADMIN')) { %>
+						<a href="/admin/movies?movie=${screening.movie.id}" class="breadcrumb">${screening.movie.title}</a>
+					<% } else { %>
+						<a href="/" class="breadcrumb">${screening.movie.title}</a>
+					<% } %>
+				<% if (screening.time) { %>
+				<a href="/screenings/${screening.id}" class="breadcrumb">${screening.time.format(FORMAT)}</a>
+				<% } %>
+				<% } %>
+			<% } else if (rooms != null) { %>
+			<a href="/" class="breadcrumb">Home</a>
+			<a href="/admin/rooms" class="breadcrumb">Rooms</a>
+				<% if (room != null) { %>
+				<a href="/admin/rooms?room=${room.id}" class="breadcrumb">Room ${room.id ?? ''}</a>
+				<% } %>
+			<% } else if (room != null) { %>
+			<a href="/" class="breadcrumb">Home</a>
+			<a href="/admin/rooms" class="breadcrumb">Rooms</a>
+			<a href="/admin/rooms?room=${room.id}" class="breadcrumb">Room ${room.id}</a>
+			<% } else if (movies != null) { %>
+			<a href="/" class="breadcrumb">Home</a>
+				<% if (#sec.hasAuthority('ADMIN') && !#request.getPath().equals('/')) { %>
+					<a href="/admin/movies" class="breadcrumb">Movies</a>
+				<% } %>
+				<% if (movie != null) { %>
+					<a href="/admin/movies?movie=${movie.id}" class="breadcrumb">${movie.title}</a>
+				<% } %>
+			<% } else if (screenings != null && movie != null) { %>
+			<a href="/" class="breadcrumb">Home</a>
+			<a href="/admin/movies" class="breadcrumb">Movies</a>
+			<a href="/admin/movies/${movie.id}/edit" class="breadcrumb">${movie.title}</a>
+			<a href="/admin/movies/${movie.id}/screenings" class="breadcrumb">Screenings</a>
+			<% } else if (movie != null) { %>
+				<a href="/" class="breadcrumb">Home</a>
+				<a href="/admin/movies" class="breadcrumb">Movies</a>
+				<a href="/admin/movies/${movie.id}/edit" class="breadcrumb">${movie.title}</a>
 			<% } %>
 		</div>
 	</div>

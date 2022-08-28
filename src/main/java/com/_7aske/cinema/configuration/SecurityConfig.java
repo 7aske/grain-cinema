@@ -17,7 +17,8 @@ public class SecurityConfig implements SecurityConfigurer {
 	public void configure(SecurityConfigurationBuilder sec) {
 		logger.debug("Configuring security");
 		sec.withRules()
-				.urlPattern("/screenings/*/reservations/*").authenticated()
+				.urlPattern("/screenings/*/reservations/*").authenticated().and()
+				.urlPattern("/admin/**").authenticated().roles("ADMIN")
 				.buildRules();
 	}
 }

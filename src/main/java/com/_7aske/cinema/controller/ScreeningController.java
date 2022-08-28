@@ -17,14 +17,14 @@ public class ScreeningController {
 	public final ScreeningService screeningService;
 
 	@GetMapping("/{id}")
-	public View index(@PathVariable("id") Integer id) {
+	public View index(@PathVariable("id") Long id) {
 		TemplateView view = new TemplateView("pages/screening.gtl");
 		view.addAttribute("screening", screeningService.findById(id));
 		return view;
 	}
 
 	@PostMapping("/{id}/reservations/{number}")
-	public String reserve(@PathVariable("id") Integer id, @PathVariable("number") Integer number) {
+	public String reserve(@PathVariable("id") Long id, @PathVariable("number") Integer number) {
 		screeningService.reserve(id, number);
 		return "redirect:/screenings/" + id;
 	}

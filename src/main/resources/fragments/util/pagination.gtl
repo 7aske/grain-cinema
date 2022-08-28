@@ -1,0 +1,47 @@
+<%
+	url = url ?? "/";
+	perPage = perPage ?? "3";
+	pageable = Integer.parseInt(#request.getStringParameter("page") ?? "0");
+%>
+<ul class="pagination">
+	<%
+		prevDisabledClass = pageable == 0 ? 'disabled' : '';
+	%>
+
+	<li class="${prevDisabledClass} waves-effect">
+		<a href="${url}?page=${0 + "," + perPage}">
+			<i class="material-icons">first_page</i>
+		</a>
+	</li>
+	<li class="${prevDisabledClass} waves-effect">
+		<% if (pageable != 0) { %>
+		<a href="${url}?page=${(pageable - 1) + "," + perPage}">
+			<i class="material-icons">chevron_left</i>
+		</a>
+		<% } else { %>
+		<a href="#">
+			<i class="material-icons">chevron_left</i>
+		</a>
+		<% } %>
+	</li>
+	<% for (i = pageable - 2; i < pageable; i++) {%>
+		<% if (i >= 0) { %>
+		<li class="waves-effect">
+			<a href="${url}?page=${i + "," + perPage}">${i + 1}</a>
+		</li>
+		<% } %>
+	<% } %>
+	<li class="active">
+		<a href="#!">${pageable + 1}</a>
+	</li>
+	<% for (i = pageable + 1; i < pageable + 3; i++) {%>
+	<li class="waves-effect">
+		<a href="${url}?page=${i + "," + perPage}">${i + 1}
+		</a>
+	</li>
+	<% } %>
+	<li class="waves-effect">
+		<a href="${url}?page=${(pageable + 1) + "," + perPage}"><i
+				class="material-icons">chevron_right</i></a>
+	</li>
+</ul>

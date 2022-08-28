@@ -37,7 +37,7 @@
 					<label for="password">Password</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row white-text">
 				Don't have an account?&nbsp;&nbsp; <a
 					href="/register">Register</a>
 			</div>

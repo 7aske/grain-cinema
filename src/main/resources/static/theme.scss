@@ -1,0 +1,10 @@
+$theme-background: #232323;
+$theme-background-light: lighten($theme-background, 5%);
+$theme-primary: #F05454;
+$theme-primary-light: lighten($theme-primary, 20%);
+$theme-primary-dark: darken($theme-primary, 20%);
+$theme-secondary: #30475E;
+$theme-secondary-light: lighten($theme-secondary, 20%);
+$theme-secondary-dark: darken($theme-secondary, 20%);
+$theme-white: #eeeeee;
+

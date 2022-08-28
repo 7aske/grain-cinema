@@ -26,15 +26,19 @@
 	<div class="row">
 		<div class="col s12 l2"></div>
 		<div class="col s12 l4">
-			<h2>Seats</h2>
-			<div class="seats">
-				<% foreach(seat in range(screening.getRoom().getSeats()) {
-					@Seat(id=screening.id, number = seat + 1, taken = screening.isSeatTaken(seat + 1), self = screening.isSeatTakenBy(seat + 1, #authentication));
-				} %>
+			<div class="seats-container card">
+				<h2>Seats</h2>
+				<div class="seats">
+					<% foreach(seat in range(screening.getRoom().getSeats())
+						{
+							@Seat(id = screening.id, number = seat + 1, taken = screening.isSeatTaken(seat + 1), self = screening.isSeatTakenBy(seat + 1, #authentication))
+							;
+						} %>
+				</div>
 			</div>
 		</div>
 		<div class="col s12 l4">
-			<div class="row">
+			<div class="row pt-2">
 				<% @MovieCard(movie = screening.getMovie(), cols = 's12') %>
 			</div>
 		</div>

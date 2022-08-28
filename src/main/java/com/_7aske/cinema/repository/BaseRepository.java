@@ -42,7 +42,7 @@ public abstract class BaseRepository<E> {
 		Query query = entityManager.createQuery(where);
 		if (pageable != null) {
 			query.setFirstResult(pageable.getPageOffset());
-			query.setMaxResults((pageable.getPageNumber() + 1) * pageable.getPageSize());
+			query.setMaxResults(pageable.getPageSize());
 		}
 		return query.getResultList();
 	}

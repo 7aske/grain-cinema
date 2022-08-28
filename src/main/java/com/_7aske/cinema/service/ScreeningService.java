@@ -1,10 +1,18 @@
 package com._7aske.cinema.service;
 
+import com._7aske.cinema.data.dto.ScreeningDto;
 import com._7aske.cinema.model.Screening;
 
-public interface ScreeningService {
-	int getRemainingSeats(Integer screeningId);
-	Screening findById(Integer id);
+import java.util.Collection;
 
-	void reserve(Integer id, Integer number);
+public interface ScreeningService {
+	int getRemainingSeats(Long screeningId);
+
+	Screening findById(Long id);
+
+	Screening saveOrUpdate(ScreeningDto screeningDto);
+
+	Collection<Screening> findByMovieId(Long id);
+
+	void reserve(Long id, Integer number);
 }

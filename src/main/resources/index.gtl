@@ -1,5 +1,6 @@
 <% include "fragments/import.gtl" as Imports; %>
 <% include "fragments/nav.gtl" as Nav; %>
+<% include "fragments/util/pagination.gtl" as Pagination; %>
 <% include "fragments/index/movie-card.gtl" as MovieCard; %>
 <!doctype html>
 <html lang="en">
@@ -14,6 +15,9 @@
 <body>
 	<% @Nav() %>
 <main id="index-page" class="container">
+	<div class="row mb-0">
+		<% @Pagination() %>
+	</div>
 	<div class="row">
 		<% foreach (movie in movies) @MovieCard(movie=movie); %>
 	</div>

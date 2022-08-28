@@ -27,6 +27,7 @@ public class Screening {
 	@JoinColumn(name = "movie_fk", referencedColumnName = "movie_id", nullable = false)
 	private Movie movie;
 	@OneToMany(mappedBy = "screening")
+	@ToString.Exclude
 	private List<Reservation> reservations;
 
 	public boolean isSeatTaken(int seat) {

@@ -1,0 +1,76 @@
+<% include
+	"fragments/import.gtl"
+	as Imports; %>
+<% include
+	"fragments/nav.gtl"
+	as Nav; %>
+<% include
+	"fragments/util/pagination.gtl"
+	as Pagination; %>
+<% include
+	"fragments/index/movie-card.gtl"
+	as MovieCard; %>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<% @Imports() %>
+	<title>Grain | Cinema | Admin</title>
+</head>
+<body>
+<% @Nav() %>
+<main id="admin-page">
+	<div class="row">
+		<div class="col s12 l2"></div>
+		<div class="col s12 l4">
+			<div class="row mb-0">
+				<div class="input-field mb-0 col s8">
+					<form action="/admin/movies" method="post">
+						<i class="material-icons prefix">search</i>
+						<input id="search" name="search" type="text" autofocus
+							   value="${search ?? ''}">
+					</form>
+				</div>
+				<div class="mb-0 col s4 pt-4">
+					<a href="/admin/movies/add" class="btn">add</a>
+				</div>
+			</div>
+			<div class="row">
+				<ul class="collection">
+					<% foreach(movie in movies)
+						{ %>
+					<li class="collection-item">
+						<a href="/admin/movies?movie=${movie.id}"
+						   class="white-text">
+							${movie.title} <span
+								class="secondary-content">${movie.screenings.size()}</span>
+						</a>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+			<% @Pagination(url = "/admin/movies", perPage = 12) %>
+		</div>
+		<div class="col s12 l4 pt-2 mb-0">
+			<% if (movie != null) { %>
+			<% @MovieCard(movie = movie, cols = 's12') ; %>
+			<div class="row pl-2 pl-4 mb-0">
+				<div class="inline-block mt-2">
+					<a href="/admin/movies/${movie.id}/edit" class="btn">edit</a>
+				</div>
+				<div class="inline-block mt-2">
+					<form action="/admin/movies/delete" method="post">
+						<input type="hidden" name="id" value="${movie.id}">
+						<button class="btn red accent-2">delete</button>
+					</form>
+				</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</main>
+</body>
+</html>

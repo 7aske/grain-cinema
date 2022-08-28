@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Movie {
 	private String url;
 	@Column(name = "title", nullable = false)
 	private String title;
-	@Column(name = "description")
+	@Column(name = "description", length = 1024)
 	private String description;
 	@Column(name = "genre")
 	private String genre;
@@ -32,6 +33,7 @@ public class Movie {
 	private String director;
 	@Column(name = "release_date")
 	private LocalDate releaseDate;
-	@OneToMany(mappedBy = "movie")
-	private List<Screening> screenings;
+	@OneToMany(mappedBy = "movie", cascade = {CascadeType.REMOVE})
+	@ToString.Exclude
+	private List<Screening> screenings = new ArrayList<>();
 }
