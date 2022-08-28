@@ -8,6 +8,9 @@
 	"fragments/index/movie-card.gtl"
 	as MovieCard; %>
 <% include
+	"fragments/util/spinner.gtl"
+	as Spinner; %>
+<% include
 	"fragments/screening/seat.gtl"
 	as Seat; %>
 <!doctype html>
@@ -27,7 +30,7 @@
 		<div class="col s12 l2"></div>
 		<div class="col s12 l4">
 			<div class="seats-container card">
-				<h2>Seats</h2>
+				<h2>Seats<span class="free"><% @Spinner() %></span></h2>
 				<div class="seats">
 					<% foreach(seat in range(screening.getRoom().getSeats())
 						{
@@ -44,6 +47,18 @@
 		</div>
 	</div>
 </main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+		fetch("/api/screenings/" + ${screening.id} + "/seats")
+			.then(res => res.text())
+			.then(res => {
+				console.log(res);
+                setTimeout(() => {
+                    document.querySelector(".free").innerHTML = "("+res+")";
+				}, 500)
+			});
+    });
+</script>
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".seat form").forEach(seat => {

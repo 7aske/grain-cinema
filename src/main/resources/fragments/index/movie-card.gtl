@@ -14,6 +14,9 @@
 			<p><b>Duration:</b> <span class="card-duration">${movie.duration}</span>min</p>
 			<p><b>Director:</b> <span class="card-director">${movie.director}</span></p>
 			<div class="screenings row">
+				<% if (movie.screenings.isEmpty()) { %>
+					<h6>No screenings</h6>
+				<% } %>
 				<% foreach(screening in movie.screenings) {%>
 					<div class="col s12 m12 l6">
 						<a class="time-link" href="/screenings/${screening.id}"><span class="time">${screening.time.format(DTFormat.ofPattern(FORMAT))}</span></a>
