@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.1.1.Final</version>
+            <version>6.1.2.Final</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jaxb-api</artifactId>
@@ -69,6 +69,18 @@
             </exclusions>
         </dependency>
         <!-- END Hibernate -->
+        <!-- Logging dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.18.0</version>
+        </dependency>
+        <!-- END Logging dependencies -->
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -93,9 +105,18 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>com._7aske.cinema.CinemaApp</mainClass>
+                        </transformer>
+                    </transformers>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>exec</shadedClassifierName>
+                </configuration>
             </plugin>
             <!-- END Grain build plugins -->
         </plugins>
     </build>
-
 </project>
