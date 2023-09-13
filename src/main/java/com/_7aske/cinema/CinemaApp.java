@@ -1,10 +1,11 @@
 package com._7aske.cinema;
 
-import com._7aske.grain.GrainApp;
 import com._7aske.grain.GrainAppRunner;
+import com._7aske.grain.core.configuration.GrainApplication;
 
-public class CinemaApp extends GrainApp {
-	public static void main(String[] args) {
-		GrainAppRunner.run(CinemaApp.class);
-	}
+@GrainApplication
+public class CinemaApp {
+    public static void main(String[] args) {
+        GrainAppRunner.run(CinemaApp.class);
+    }
 }

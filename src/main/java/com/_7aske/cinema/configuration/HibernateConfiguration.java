@@ -6,6 +6,7 @@ import com._7aske.grain.util.classloader.GrainClassLoader;
 import com._7aske.grain.util.classloader.GrainJarClassLoader;
 import jakarta.persistence.Entity;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Integration with Hibernate. All of Hibernates required configuration properties
@@ -21,7 +22,7 @@ public class HibernateConfiguration {
 
 	@Grain
 	public SessionFactory sessionFactory() {
-		org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
+		Configuration configuration = new Configuration();
 
 		GrainClassLoader grainClassLoader = new GrainJarClassLoader(CinemaApp.class.getPackageName());
 		grainClassLoader.loadClasses(cl -> cl.isAnnotationPresent(Entity.class))

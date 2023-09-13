@@ -4,18 +4,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com._7aske.grain</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
     <groupId>com._7aske.cinema</groupId>
     <artifactId>cinema</artifactId>
     <version>1.0</version>
+
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>com._7aske</groupId>
-            <artifactId>grain</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com._7aske.grain</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -90,33 +99,12 @@
         </dependency>
         <!-- END Test dependencies -->
     </dependencies>
-    <build>
-        <plugins>
-            <!-- Grain build plugins -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>com._7aske.cinema.CinemaApp</mainClass>
-                        </transformer>
-                    </transformers>
-                    <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <shadedClassifierName>exec</shadedClassifierName>
-                </configuration>
-            </plugin>
-            <!-- END Grain build plugins -->
-        </plugins>
-    </build>
+
+    <repositories>
+        <repository>
+            <id>7aske-repository-releases</id>
+            <name>7aske repository</name>
+            <url>https://maven.7aske.xyz/releases</url>
+        </repository>
+    </repositories>
 </project>
