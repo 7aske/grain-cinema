@@ -2,14 +2,12 @@ package com._7aske.cinema.service.impl;
 
 import com._7aske.cinema.data.dto.MovieDto;
 import com._7aske.cinema.model.Movie;
-import com._7aske.cinema.model.Room;
 import com._7aske.cinema.repository.MovieRepository;
 import com._7aske.cinema.service.MovieService;
 import com._7aske.grain.core.component.Grain;
 import com._7aske.grain.orm.page.Pageable;
 import lombok.RequiredArgsConstructor;
 
-import javax.management.modelmbean.ModelMBeanOperationInfo;
 import java.util.Collection;
 
 @Grain

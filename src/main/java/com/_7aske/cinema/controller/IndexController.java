@@ -6,8 +6,6 @@ import com._7aske.cinema.service.UserService;
 import com._7aske.grain.core.component.Controller;
 import com._7aske.grain.http.form.FormBody;
 import com._7aske.grain.orm.page.Pageable;
-import com._7aske.grain.security.BasicAuthority;
-import com._7aske.grain.security.context.SecurityContextHolder;
 import com._7aske.grain.web.controller.annotation.GetMapping;
 import com._7aske.grain.web.controller.annotation.PostMapping;
 import com._7aske.grain.web.controller.annotation.RequestMapping;

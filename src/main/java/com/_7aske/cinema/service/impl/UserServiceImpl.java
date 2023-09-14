@@ -1,9 +1,9 @@
 package com._7aske.cinema.service.impl;
 
 import com._7aske.cinema.data.dto.RegisterUserDto;
-import com._7aske.cinema.model.domain.Role;
 import com._7aske.cinema.exception.PasswordsNotMatchingException;
 import com._7aske.cinema.model.User;
+import com._7aske.cinema.model.domain.Role;
 import com._7aske.cinema.repository.UserRepository;
 import com._7aske.cinema.service.UserService;
 import com._7aske.grain.core.component.Grain;
