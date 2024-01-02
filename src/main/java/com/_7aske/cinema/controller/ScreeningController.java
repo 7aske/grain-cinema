@@ -1,6 +1,7 @@
 package com._7aske.cinema.controller;
 
 import com._7aske.cinema.service.ScreeningService;
+import com._7aske.cinema.util.TemplateViewBuilder;
 import com._7aske.grain.core.component.Controller;
 import com._7aske.grain.web.controller.annotation.GetMapping;
 import com._7aske.grain.web.controller.annotation.PathVariable;
@@ -18,9 +19,9 @@ public class ScreeningController {
 
 	@GetMapping("/{id}")
 	public View index(@PathVariable("id") Long id) {
-		TemplateView view = new TemplateView("pages/screening.gtl");
-		view.addAttribute("screening", screeningService.findById(id));
-		return view;
+		return TemplateViewBuilder.builder("pages/screening.gtl")
+				.withAttribute("screening", screeningService.findById(id))
+				.build();
 	}
 
 	@PostMapping("/{id}/reservations/{number}")

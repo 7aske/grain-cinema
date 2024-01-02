@@ -1,6 +1,6 @@
 package com._7aske.cinema.configuration;
 
-import com._7aske.cinema.CinemaApp;
+import com._7aske.cinema.Application;
 import com._7aske.grain.core.component.Grain;
 import com._7aske.grain.util.classloader.GrainClassLoader;
 import com._7aske.grain.util.classloader.GrainJarClassLoader;
@@ -24,7 +24,7 @@ public class HibernateConfiguration {
 	public SessionFactory sessionFactory() {
 		Configuration configuration = new Configuration();
 
-		GrainClassLoader grainClassLoader = new GrainJarClassLoader(CinemaApp.class.getPackageName());
+		GrainClassLoader grainClassLoader = new GrainJarClassLoader(Application.class.getPackageName());
 		grainClassLoader.loadClasses(cl -> cl.isAnnotationPresent(Entity.class))
 				.forEach(configuration::addAnnotatedClass);
 

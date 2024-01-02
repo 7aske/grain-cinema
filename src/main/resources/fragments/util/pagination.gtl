@@ -1,7 +1,7 @@
 <%
 	url = url ?? "/";
 	perPage = perPage ?? "3";
-	pageable = Integer.parseInt(#request.getStringParameter("page") ?? "0");
+	pageable = Integer.parseInt(#request.getParameter("page") ?? "0");
 %>
 <ul class="pagination">
 	<%

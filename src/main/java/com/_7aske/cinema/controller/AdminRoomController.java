@@ -3,13 +3,14 @@ package com._7aske.cinema.controller;
 import com._7aske.cinema.data.dto.RoomDto;
 import com._7aske.cinema.model.Room;
 import com._7aske.cinema.service.RoomService;
+import com._7aske.cinema.util.TemplateViewBuilder;
 import com._7aske.grain.core.component.Controller;
 import com._7aske.grain.exception.http.HttpException;
-import com._7aske.grain.http.form.FormBody;
 import com._7aske.grain.web.controller.annotation.GetMapping;
 import com._7aske.grain.web.controller.annotation.PostMapping;
 import com._7aske.grain.web.controller.annotation.RequestMapping;
 import com._7aske.grain.web.controller.annotation.RequestParam;
+import com._7aske.grain.web.http.codec.form.FormBody;
 import com._7aske.grain.web.view.TemplateView;
 import com._7aske.grain.web.view.View;
 import lombok.RequiredArgsConstructor;
@@ -27,20 +28,23 @@ public class AdminRoomController {
 
 	@GetMapping
 	public View getIndex(@RequestParam("room") Long roomId) {
-		TemplateView templateView = new TemplateView(VIEW);
-		templateView.addAttribute(LIST_ATTR, service.findAll());
+		TemplateView templateView = TemplateViewBuilder.builder(VIEW)
+				.withAttribute(LIST_ATTR, service.findAll())
+				.build();
+
 		if (roomId != null) {
 			templateView.addAttribute("room", service.findById(roomId));
 		}
+
 		return templateView;
 	}
 
 	@GetMapping("/add")
 	public View getAdd() {
-		TemplateView templateView = new TemplateView(VIEW);
-		templateView.addAttribute(LIST_ATTR, service.findAll());
-		templateView.addAttribute("room", new Room());
-		return templateView;
+		return TemplateViewBuilder.builder(VIEW)
+				.withAttribute(LIST_ATTR, service.findAll())
+				.withAttribute("room", new Room())
+				.build();
 	}
 
 	@PostMapping("/save")

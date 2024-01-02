@@ -4,6 +4,7 @@ package com._7aske.cinema.model;
 import com._7aske.grain.security.Authentication;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "screening")
 @Getter @Setter @ToString
+@NoArgsConstructor
 public class Screening {
 	@Id
     @Column(name = "screening_id", nullable = false, updatable = false)
@@ -29,6 +31,10 @@ public class Screening {
 	@OneToMany(mappedBy = "screening")
 	@ToString.Exclude
 	private List<Reservation> reservations;
+
+	public Screening(Movie movie) {
+		this.movie = movie;
+	}
 
 	public boolean isSeatTaken(int seat) {
 		return reservations.stream()

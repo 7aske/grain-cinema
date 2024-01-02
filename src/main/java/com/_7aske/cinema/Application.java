@@ -4,8 +4,8 @@ import com._7aske.grain.GrainAppRunner;
 import com._7aske.grain.core.configuration.GrainApplication;
 
 @GrainApplication
-public class CinemaApp {
+public class Application {
     public static void main(String[] args) {
-        GrainAppRunner.run(CinemaApp.class);
+        GrainAppRunner.run(Application.class);
     }
 }

@@ -6,9 +6,10 @@ import com._7aske.cinema.model.Screening;
 import com._7aske.cinema.service.MovieService;
 import com._7aske.cinema.service.RoomService;
 import com._7aske.cinema.service.ScreeningService;
+import com._7aske.cinema.util.TemplateViewBuilder;
 import com._7aske.grain.core.component.Controller;
-import com._7aske.grain.http.form.FormBody;
 import com._7aske.grain.web.controller.annotation.*;
+import com._7aske.grain.web.http.codec.form.FormBody;
 import com._7aske.grain.web.view.TemplateView;
 import com._7aske.grain.web.view.View;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,10 @@ public class AdminScreeningController {
 	@GetMapping
 	public View getIndex(@PathVariable("movieId") Long movieId,
 	                     @RequestParam("screening") Long screeningId) {
-		TemplateView templateView = new TemplateView(VIEW);
-		templateView.addAttribute(LIST_ATTR, screeningService.findByMovieId(movieId));
-		templateView.addAttribute("movie", movieService.findById(movieId));
+		TemplateView templateView = TemplateViewBuilder.builder(VIEW)
+				.withAttribute(LIST_ATTR, screeningService.findByMovieId(movieId))
+				.withAttribute("movie", movieService.findById(movieId))
+				.build();
 
 		if (screeningId != null) {
 			templateView.addAttribute(ROOM_LIST_ATTR, roomService.findAll());
@@ -43,15 +45,15 @@ public class AdminScreeningController {
 
 	@GetMapping("/add")
 	public View getAdd(@PathVariable("movieId") Long movieId) {
-		TemplateView templateView = new TemplateView(VIEW);
-		templateView.addAttribute(LIST_ATTR, screeningService.findByMovieId(movieId));
-		templateView.addAttribute(ROOM_LIST_ATTR, roomService.findAll());
-		Movie movie =movieService.findById(movieId);
-		templateView.addAttribute("movie", movie);
-		Screening screening = new Screening();
-		screening.setMovie(movie);
-		templateView.addAttribute("screening", screening);
-		return templateView;
+		Movie movie = movieService.findById(movieId);
+		Screening screening = new Screening(movie);
+
+		return TemplateViewBuilder.builder(VIEW)
+				.withAttribute(LIST_ATTR, screeningService.findByMovieId(movieId))
+				.withAttribute(ROOM_LIST_ATTR, roomService.findAll())
+				.withAttribute("movie", movieService.findById(movieId))
+				.withAttribute(SINGLE_ATTR, screening)
+				.build();
 	}
 
 	@PostMapping("/save")

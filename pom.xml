@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com._7aske.grain</groupId>
+        <groupId>com.7aske.grain</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
         <relativePath/>
     </parent>
 
-    <groupId>com._7aske.cinema</groupId>
+    <groupId>com.7aske.cinema</groupId>
     <artifactId>cinema</artifactId>
     <version>1.0</version>
 
@@ -22,16 +22,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com._7aske.grain</groupId>
+            <groupId>com.7aske.grain</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
-            <version>1.18.24</version>
+            <version>1.18.28</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -71,25 +70,9 @@
                     <artifactId>javax.persistence-api</artifactId>
                     <groupId>javax.persistence</groupId>
                 </exclusion>
-                <exclusion>
-                    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-                    <groupId>org.jboss.spec.javax.transaction</groupId>
-                </exclusion>
             </exclusions>
         </dependency>
         <!-- END Hibernate -->
-        <!-- Logging dependencies -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.18.0</version>
-        </dependency>
-        <!-- END Logging dependencies -->
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

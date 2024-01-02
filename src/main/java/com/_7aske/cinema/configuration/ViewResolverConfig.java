@@ -3,11 +3,11 @@ package com._7aske.cinema.configuration;
 import com._7aske.grain.core.component.Grain;
 import com._7aske.grain.core.configuration.Configuration;
 import com._7aske.grain.exception.GrainRuntimeException;
-import com._7aske.grain.http.HttpRequest;
-import com._7aske.grain.http.HttpResponse;
-import com._7aske.grain.http.session.Session;
 import com._7aske.grain.security.Authentication;
 import com._7aske.grain.ui.LoginPage;
+import com._7aske.grain.web.http.HttpRequest;
+import com._7aske.grain.web.http.HttpResponse;
+import com._7aske.grain.web.http.session.Session;
 import com._7aske.grain.web.view.View;
 import com._7aske.grain.web.view.ViewResolver;
 import org.thymeleaf.TemplateEngine;
@@ -17,7 +17,8 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 import java.io.IOException;
 
-import static com._7aske.grain.http.HttpHeaders.CONTENT_TYPE;
+import static com._7aske.grain.web.http.HttpHeaders.CONTENT_TYPE;
+
 
 /**
  * Thymeleaf integration. Simple implementation of a {@link ViewResolver} with

@@ -1,9 +1,9 @@
 package com._7aske.cinema.model;
 
 import com._7aske.cinema.model.domain.Role;
-import com._7aske.grain.http.json.JsonIgnore;
 import com._7aske.grain.security.Authority;
 import com._7aske.grain.security.BasicAuthority;
+import com._7aske.grain.web.http.codec.json.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
