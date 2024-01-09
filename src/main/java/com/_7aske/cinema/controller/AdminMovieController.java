@@ -49,7 +49,7 @@ public class AdminMovieController {
 	}
 
 	@GetMapping("/add")
-	public View getAdd(@PathVariable("id") Long id) {
+	public View getAdd() {
 		return TemplateViewBuilder.builder(EDIT_VIEW)
 				.withAttribute(SINGLE_ATTR, new Movie())
 				.build();
