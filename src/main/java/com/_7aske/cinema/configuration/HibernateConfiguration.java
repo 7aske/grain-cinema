@@ -2,8 +2,9 @@ package com._7aske.cinema.configuration;
 
 import com._7aske.cinema.Application;
 import com._7aske.grain.core.component.Grain;
-import com._7aske.grain.util.classloader.GrainClassLoader;
-import com._7aske.grain.util.classloader.GrainJarClassLoader;
+import com._7aske.grain.core.component.Inject;
+import com._7aske.grain.core.reflect.classloader.GrainClassLoader;
+import com._7aske.grain.core.reflect.classloader.GrainJarClassLoader;
 import jakarta.persistence.Entity;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

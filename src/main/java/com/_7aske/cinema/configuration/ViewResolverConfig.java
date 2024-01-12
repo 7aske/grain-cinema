@@ -38,7 +38,8 @@ import static com._7aske.grain.web.http.HttpHeaders.CONTENT_TYPE;
 @Grain
 public class ViewResolverConfig {
 
-	private ITemplateResolver htmlTemplateResolver() {
+	@Grain
+	ITemplateResolver htmlTemplateResolver() {
 		StringTemplateResolver resolver
 				= new StringTemplateResolver();
 		resolver.setCacheable(false);
@@ -46,8 +47,19 @@ public class ViewResolverConfig {
 	}
 
 	@Grain
-	public ViewResolver thymeleafViewResolver(com._7aske.grain.core.configuration.Configuration configuration) {
+	TemplateEngine htmlTemplateEngine() {
+		TemplateEngine templateEngine = new TemplateEngine();
+		templateEngine.setTemplateResolver(htmlTemplateResolver());
+		return templateEngine;
+	}
+
+	@Grain
+	ViewResolver thymeleafViewResolver(
+			com._7aske.grain.core.configuration.Configuration configuration
+	) {
 		return new ViewResolver() {
+			final TemplateEngine templateEngine = htmlTemplateEngine();
+
 			@Override
 			public boolean supports(View view) {
 				return view.getName().endsWith(".html");
@@ -60,15 +72,7 @@ public class ViewResolverConfig {
 				Context context = new Context();
 				context.setVariables(view.getAttributes());
 
-				TemplateEngine templateEngine = new TemplateEngine();
-				templateEngine.setTemplateResolver(ViewResolverConfig.this.htmlTemplateResolver());
-				String body;
-
-				if (view instanceof LoginPage) {
-					body = view.getContent();
-				} else {
-					body = templateEngine.process(view.getName(), context);
-				}
+				String body = templateEngine.process(view.getContent(), context);
 
 				try {
 					response.getOutputStream().write(body.getBytes());

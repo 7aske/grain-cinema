@@ -56,7 +56,7 @@ public class AdminRoomController {
 	@PostMapping("/delete")
 	public String postDelete(@FormBody Map<String, String[]> body) {
 		if (body.get("id") == null) {
-			throw new HttpException.BadRequest("Invalid id", "/admin/rooms/delete");
+			throw new HttpException.BadRequest("Invalid id");
 		}
 		String id =  body.get("id")[0];
 		service.deleteById(Long.valueOf(id));
