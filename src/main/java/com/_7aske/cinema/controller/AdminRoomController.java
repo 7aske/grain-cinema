@@ -4,12 +4,8 @@ import com._7aske.cinema.data.dto.RoomDto;
 import com._7aske.cinema.model.Room;
 import com._7aske.cinema.service.RoomService;
 import com._7aske.cinema.util.TemplateViewBuilder;
-import com._7aske.grain.core.component.Controller;
-import com._7aske.grain.exception.http.HttpException;
-import com._7aske.grain.web.controller.annotation.GetMapping;
-import com._7aske.grain.web.controller.annotation.PostMapping;
-import com._7aske.grain.web.controller.annotation.RequestMapping;
-import com._7aske.grain.web.controller.annotation.RequestParam;
+import com._7aske.grain.web.controller.annotation.*;
+import com._7aske.grain.web.exception.HttpException;
 import com._7aske.grain.web.http.codec.form.FormBody;
 import com._7aske.grain.web.view.TemplateView;
 import com._7aske.grain.web.view.View;
@@ -27,7 +23,7 @@ public class AdminRoomController {
 	private static final String LIST_ATTR = "rooms";
 
 	@GetMapping
-	public View getIndex(@RequestParam("room") Long roomId) {
+	public View getIndex(@RequestParam(value = "room", required = false) Long roomId) {
 		TemplateView templateView = TemplateViewBuilder.builder(VIEW)
 				.withAttribute(LIST_ATTR, service.findAll())
 				.build();

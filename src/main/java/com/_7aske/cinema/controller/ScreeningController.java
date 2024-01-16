@@ -2,12 +2,7 @@ package com._7aske.cinema.controller;
 
 import com._7aske.cinema.service.ScreeningService;
 import com._7aske.cinema.util.TemplateViewBuilder;
-import com._7aske.grain.core.component.Controller;
-import com._7aske.grain.web.controller.annotation.GetMapping;
-import com._7aske.grain.web.controller.annotation.PathVariable;
-import com._7aske.grain.web.controller.annotation.PostMapping;
-import com._7aske.grain.web.controller.annotation.RequestMapping;
-import com._7aske.grain.web.view.TemplateView;
+import com._7aske.grain.web.controller.annotation.*;
 import com._7aske.grain.web.view.View;
 import lombok.RequiredArgsConstructor;
 

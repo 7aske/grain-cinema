@@ -2,7 +2,7 @@ package com._7aske.cinema.repository;
 
 import com._7aske.grain.annotation.NotNull;
 import com._7aske.grain.annotation.Nullable;
-import com._7aske.grain.orm.page.Pageable;
+import com._7aske.grain.web.page.Pageable;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -21,7 +21,6 @@ import java.util.List;
  *
  * @param <E> Entity type.
  *
- * @see com._7aske.cinema.configuration.HibernateConfiguration
  * @see Pageable
  */
 @RequiredArgsConstructor

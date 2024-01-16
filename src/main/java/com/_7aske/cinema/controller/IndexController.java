@@ -4,19 +4,13 @@ import com._7aske.cinema.data.dto.RegisterUserDto;
 import com._7aske.cinema.service.MovieService;
 import com._7aske.cinema.service.UserService;
 import com._7aske.cinema.util.TemplateViewBuilder;
-import com._7aske.grain.core.component.Controller;
-import com._7aske.grain.orm.page.Pageable;
+import com._7aske.grain.web.page.Pageable;
 import com._7aske.grain.web.controller.annotation.*;
 import com._7aske.grain.web.http.codec.form.FormBody;
 import com._7aske.grain.web.http.session.Session;
 import com._7aske.grain.web.view.TemplateView;
 import com._7aske.grain.web.view.View;
 import lombok.RequiredArgsConstructor;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -46,10 +40,5 @@ public class IndexController {
 	public String postRegister(@FormBody RegisterUserDto user) {
 		userService.register(user);
 		return "redirect:/login?registered";
-	}
-
-	@GetMapping("/test")
-	public String test(@RequestParam("test") Optional<Long[]> test) {
-		return Arrays.toString(test.orElse(new Long[]{Long.MAX_VALUE}));
 	}
 }

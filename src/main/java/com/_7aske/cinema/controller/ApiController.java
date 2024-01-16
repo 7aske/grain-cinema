@@ -1,7 +1,7 @@
 package com._7aske.cinema.controller;
 
 import com._7aske.cinema.service.ScreeningService;
-import com._7aske.grain.core.component.Controller;
+import com._7aske.grain.web.controller.annotation.Controller;
 import com._7aske.grain.web.controller.annotation.GetMapping;
 import com._7aske.grain.web.controller.annotation.PathVariable;
 import com._7aske.grain.web.controller.annotation.RequestMapping;

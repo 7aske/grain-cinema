@@ -7,7 +7,6 @@ import com._7aske.cinema.service.MovieService;
 import com._7aske.cinema.service.RoomService;
 import com._7aske.cinema.service.ScreeningService;
 import com._7aske.cinema.util.TemplateViewBuilder;
-import com._7aske.grain.core.component.Controller;
 import com._7aske.grain.web.controller.annotation.*;
 import com._7aske.grain.web.http.codec.form.FormBody;
 import com._7aske.grain.web.view.TemplateView;

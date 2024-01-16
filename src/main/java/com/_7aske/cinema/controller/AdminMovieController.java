@@ -4,11 +4,10 @@ import com._7aske.cinema.data.dto.MovieDto;
 import com._7aske.cinema.model.Movie;
 import com._7aske.cinema.service.MovieService;
 import com._7aske.cinema.util.TemplateViewBuilder;
-import com._7aske.grain.core.component.Controller;
-import com._7aske.grain.exception.http.HttpException;
-import com._7aske.grain.orm.page.Pageable;
 import com._7aske.grain.web.controller.annotation.*;
+import com._7aske.grain.web.exception.HttpException;
 import com._7aske.grain.web.http.codec.form.FormBody;
+import com._7aske.grain.web.page.Pageable;
 import com._7aske.grain.web.view.TemplateView;
 import com._7aske.grain.web.view.View;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class AdminMovieController {
 
 	@GetMapping
 	public View getIndex(@RequestParam(value = "page", defaultValue = "0,12") Pageable pageable,
-	                     @RequestParam("movie") Long movieId) {
+						 @RequestParam(value = "movie", required = false) Long movieId) {
 
 		TemplateView templateView = TemplateViewBuilder.builder(VIEW)
 				.withAttribute(LIST_ATTR, movieService.findAll(pageable))
@@ -63,9 +62,8 @@ public class AdminMovieController {
 	}
 
 	@PostMapping
-	public View getPostIndex(@FormBody Map<String, String[]> body,
+	public View getPostIndex(@RequestParam(value = "search", required = false) String search,
 	                         @RequestParam(value = "page", defaultValue = "0,12") Pageable pageable) {
-		String search = body.get("search") == null ? "" : body.get("search")[0];
 		Collection<Movie> movies = movieService.search(search, pageable);
 
 		return TemplateViewBuilder.builder(VIEW)

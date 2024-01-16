@@ -2,7 +2,7 @@ package com._7aske.cinema.repository;
 
 import com._7aske.cinema.model.Movie;
 import com._7aske.grain.core.component.Grain;
-import com._7aske.grain.orm.page.Pageable;
+import com._7aske.grain.web.page.Pageable;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

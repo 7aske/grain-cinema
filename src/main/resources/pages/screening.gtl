@@ -50,7 +50,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 		fetch("/api/screenings/" + ${screening.id} + "/seats")
-			.then(res => res.text())
+			.then(res => {
+				if (!res.ok) {
+					return Promise.resolve("?");
+				} else {
+					return res.text();
+				}
+
+			})
 			.then(res => {
 				console.log(res);
                 setTimeout(() => {

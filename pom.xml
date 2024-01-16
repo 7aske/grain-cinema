@@ -7,13 +7,14 @@
     <parent>
         <groupId>com.7aske.grain</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.7</version>
+        <version>1.1.2</version>
         <relativePath/>
     </parent>
 
     <groupId>com.7aske.cinema</groupId>
     <artifactId>cinema</artifactId>
     <version>1.0</version>
+    <url>https://github.com/7aske/grain-cinema</url>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -23,56 +24,30 @@
     <dependencies>
         <dependency>
             <groupId>com.7aske.grain</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.7aske.grain</groupId>
+            <artifactId>grain-fertilizer-hibernate</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.7aske.grain</groupId>
+            <artifactId>grain-fertilizer-tomcat</artifactId>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
-            <version>1.18.28</version>
+            <version>1.18.30</version>
         </dependency>
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.0.7</version>
+            <version>3.3.2</version>
         </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>3.0.15.RELEASE</version>
-        </dependency>
-        <!-- Hibernate -->
-        <dependency>
-            <groupId>jakarta.transaction</groupId>
-            <artifactId>jakarta.transaction-api</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.1.2.Final</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jaxb-api</artifactId>
-                    <groupId>javax.xml.bind</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>javax.activation-api</artifactId>
-                    <groupId>javax.activation</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>javax.persistence-api</artifactId>
-                    <groupId>javax.persistence</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- END Hibernate -->
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -89,5 +64,5 @@
             <name>7aske repository</name>
             <url>https://maven.7aske.xyz/releases</url>
         </repository>
-    </repositories>
+	</repositories>
 </project>
