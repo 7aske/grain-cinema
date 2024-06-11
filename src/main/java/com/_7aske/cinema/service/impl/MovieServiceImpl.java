@@ -5,6 +5,7 @@ import com._7aske.cinema.model.Movie;
 import com._7aske.cinema.repository.MovieRepository;
 import com._7aske.cinema.service.MovieService;
 import com._7aske.grain.core.component.Grain;
+import com._7aske.grain.data.dsl.Specification;
 import com._7aske.grain.web.page.Pageable;
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +36,13 @@ public class MovieServiceImpl implements MovieService {
 		if (search == null || search.isBlank())
 			return findAll(pageable);
 
-		return movieRepository.search(search, pageable);
+		Specification<Movie> specification = (root, query, cb) -> cb.or(
+				cb.like(cb.lower(root.get("title")), "%" + search.toLowerCase() + "%"),
+				cb.like(cb.lower(root.get("genre")), "%" + search.toLowerCase() + "%"),
+				cb.like(cb.lower(root.get("director")), "%" + search.toLowerCase() + "%")
+		);
+
+		return movieRepository.findAll(specification, pageable);
 	}
 
 	@Override

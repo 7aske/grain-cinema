@@ -32,7 +32,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 	public int getRemainingSeats(Long screeningId) {
 		Screening screening = screeningRepository.findById(screeningId);
 		Room room = screening.getRoom();
-		List<Reservation> reservations = reservationRepository.findAllByScreeningFk(screening.getId());
+		List<Reservation> reservations = reservationRepository.findAllByScreeningId(screening.getId());
 		return room.getSeats() - reservations.size();
 	}
 
@@ -76,7 +76,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 			reservationRepository.save(reservation);
 		} else if (screening.isSeatTakenBy(number, authentication)) {
 			Reservation reservation = reservationRepository
-					.findByUsernameAndIdScreeningFkAndSeat(authentication.getName(), id, number);
+					.findByUserUsernameAndScreeningIdAndSeat(authentication.getName(), id, number);
 			reservationRepository.delete(reservation);
 		}
 	}

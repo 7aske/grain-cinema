@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -17,7 +18,7 @@ import java.util.Collections;
 		@Index(name = "user_username_idx", columnList = "username", unique = true)
 })
 @Getter @Setter @ToString
-public class User implements com._7aske.grain.security.User {
+public class User implements com._7aske.grain.security.User, Serializable {
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
