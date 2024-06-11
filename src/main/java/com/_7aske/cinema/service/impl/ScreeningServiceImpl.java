@@ -11,6 +11,8 @@ import com._7aske.cinema.service.MovieService;
 import com._7aske.cinema.service.RoomService;
 import com._7aske.cinema.service.ScreeningService;
 import com._7aske.cinema.service.UserService;
+import com._7aske.grain.cache.annotation.CacheEvict;
+import com._7aske.grain.cache.annotation.Cacheable;
 import com._7aske.grain.core.component.Grain;
 import com._7aske.grain.security.Authentication;
 import com._7aske.grain.security.context.SecurityContextHolder;
@@ -29,6 +31,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 	private final MovieService movieService;
 
 	@Override
+	@Cacheable(value = "screening", key = "arg0")
 	public int getRemainingSeats(Long screeningId) {
 		Screening screening = screeningRepository.findById(screeningId);
 		Room room = screening.getRoom();
@@ -64,6 +67,7 @@ public class ScreeningServiceImpl implements ScreeningService {
 	}
 
 	@Override
+	@CacheEvict(value = "screening", key = "arg0")
 	public void reserve(Long id, Integer number) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Screening screening = findById(id);

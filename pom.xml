@@ -30,6 +30,11 @@
         </dependency>
         <dependency>
             <groupId>com.7aske.grain</groupId>
+            <artifactId>grain-fertilizer-cache</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.7aske.grain</groupId>
             <artifactId>grain-fertilizer-tomcat</artifactId>
             <version>1.0.1</version>
         </dependency>
