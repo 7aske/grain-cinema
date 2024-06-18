@@ -19,24 +19,24 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <grain.version>1.1.5-SNAPSHOT</grain.version>
+        <grain.version>1.1.5</grain.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.7aske.grain</groupId>
             <artifactId>grain-fertilizer-data</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.7aske.grain</groupId>
             <artifactId>grain-fertilizer-cache</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.7aske.grain</groupId>
             <artifactId>grain-fertilizer-tomcat</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.7aske.grain</groupId>
